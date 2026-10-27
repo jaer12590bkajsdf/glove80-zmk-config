@@ -19,6 +19,12 @@
 #define MAGIC 2
 #define FACTORY_TEST 3
 
+&lt {
+    quick-tap-ms = <175>;
+    require-prior-idle-ms = <150>;
+    hold-trigger-on-release;
+};
+
 / {
     behaviors {
         // For the "layer" key, it'd nice to be able to use it as either a shift or a toggle.
@@ -92,12 +98,12 @@
             // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
 
             bindings = <
-&kp F1      &kp F2    &kp F3   &kp F4    &kp F5                                                                                            &kp F6  &kp F7     &kp F8    &kp F9    &kp F10
-&kp EQUAL   &kp N1    &kp N2   &kp N3    &kp N4     &kp N5                                                                         &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB     &kp Q     &kp W    &kp E     &kp R      &kp T                                                                          &kp Y   &kp U   &kp I      &kp O     &kp P     &kp BSLH
-&kp ESC     &kp A     &kp S    &kp D     &kp F      &kp G                                                                          &kp H   &kp J   &kp K      &kp L     &kp SEMI  &kp SQT
-&kp GRAVE   &kp Z     &kp X    &kp C     &kp V      &kp B   &kp LSHFT  &kp LCTRL  &none     &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
-&magic 2 0  &kp HOME  &kp END  &kp LEFT  &kp RIGHT          &kp BSPC   &kp DEL    &kp LALT  &none         &kp RET    &lt 3 SPACE           &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &none
+&kp F1      &kp F2    &kp F3   &kp F4    &kp F5                                                                                              &kp F6  &kp F7     &kp F8    &kp F9    &kp F10
+&kp EQUAL   &kp N1    &kp N2   &kp N3    &kp N4     &kp N5                                                                           &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
+&kp TAB     &kp Q     &kp W    &kp E     &kp R      &kp T                                                                            &kp Y   &kp U   &kp I      &kp O     &kp P     &kp BSLH
+&kp ESC     &kp A     &kp S    &kp D     &kp F      &kp G                                                                            &kp H   &kp J   &kp K      &kp L     &kp SEMI  &kp SQT
+&kp GRAVE   &kp Z     &kp X    &kp C     &kp V      &kp B   &kp LSHFT  &kp LCTRL  &none       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
+&magic 2 0  &kp HOME  &kp END  &kp LEFT  &kp RIGHT          &kp BSPC   &mo 4      &kp DELETE  &none         &kp RET    &lt 3 SPACE           &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &none
             >;
         };
 
@@ -131,6 +137,17 @@
 &none  &kp LG(N1)  &kp LC(LS(TAB))  &kp LG(GRAVE)  &kp LC(TAB)  &kp LG(N9)                                                                                              &none  &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN  &none
 &none  &none       &none            &none          &none        &none       &kp LS(LA(LG(LEFT)))  &kp LS(LA(LG(RIGHT)))  &kp LS(LA(LG(UP_ARROW)))  &none  &none  &none  &none  &none     &none     &none      &none      &none
 &none  &none       &none            &none          &none                    &kp LS(LA(LG(LEFT)))  &none                  &none                     &none  &none  &none         &none     &none     &none      &none      &none
+            >;
+        };
+
+        LAUNCHER_LAYER {
+            bindings = <
+&none  &none                   &none                   &none                   &none                                                                                                             &none                   &none                   &none                   &none                   &none
+&none  &kp RS(RA(RC(RG(N1))))  &kp RS(RA(RC(RG(N2))))  &kp RS(RA(RC(RG(N3))))  &kp RS(RA(RC(RG(N4))))  &kp RC(RS(RA(RG(N5))))                                            &kp RS(RA(RC(RG(N6))))  &kp RS(RA(RC(RG(N7))))  &kp RS(RA(RC(RG(N8))))  &kp RS(RA(RC(RG(N9))))  &kp RS(RA(RC(RG(N0))))  &none
+&none  &kp RS(RA(RC(RG(Q))))   &kp RS(RG(RA(RC(W))))   &kp RS(RA(RC(RG(E))))   &kp RS(RC(RG(RA(R))))   &kp RS(RC(RA(RG(T))))                                             &kp RS(RA(RC(RG(Y))))   &kp RS(RA(RC(RG(U))))   &kp RS(RA(RC(RG(I))))   &kp RS(RA(RC(RG(O))))   &kp RS(RA(RC(RG(P))))   &none
+&none  &kp RS(RA(RC(RG(A))))   &kp RS(RA(RC(RG(S))))   &kp RS(RA(RC(RG(D))))   &kp RS(RA(RC(RG(F))))   &kp RS(RA(RC(RG(G))))                                             &kp RS(RA(RC(RG(H))))   &kp RS(RA(RC(RG(J))))   &kp RA(RS(RC(RG(K))))   &kp RS(RC(RG(RA(L))))   &none                   &none
+&none  &kp RS(RA(RC(RG(Z))))   &kp RS(RA(RC(RG(X))))   &kp RS(RA(RC(RG(C))))   &kp RS(RA(RC(RG(V))))   &kp RS(RA(RC(RG(B))))   &none  &none  &none  &none  &none  &none  &kp RS(RA(RC(RG(N))))   &kp RS(RA(RC(RG(M))))   &none                   &none                   &none                   &none
+&none  &none                   &none                   &none                   &none                                           &none  &none  &none  &none  &none  &none                          &none                   &none                   &none                   &none                   &none
             >;
         };
     };
