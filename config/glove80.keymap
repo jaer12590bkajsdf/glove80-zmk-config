@@ -102,7 +102,7 @@
 &kp EQUAL   &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                           &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp LC(LG(Q))
 &kp TAB     &kp Q      &kp W      &kp E      &kp R      &kp T                                                                            &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
 &kp ESC     &kp A      &kp S      &kp D      &kp F      &kp G                                                                            &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp GRAVE   &kp Z      &kp X      &kp C      &kp V      &kp B   &kp LSHFT  &kp LCTRL  &none       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
+&kp GRAVE   &kp Z      &kp X      &kp C      &kp V      &kp B   &kp LSHFT  &kp LCTRL  &mo 6       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
 &magic 2 0  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC   &mo 4      &kp DELETE  &mo 5         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &none
             >;
         };
@@ -159,6 +159,17 @@
 &none  &none       &kp LA(P)   &none       &kp LA(N)   &none                                                                &kp LA(H)   &kp LA(LEFT)  &kp LA(DOWN)  &kp LA(RIGHT)  &none       &none
 &none  &none       &none       &kp LA(C)   &kp LA(V)   &none       &kp LA(LEFT_BRACKET)  &none  &none  &none  &none  &none  &none       &none         &none         &none          &none       &none
 &none  &none       &none       &none       &none                   &kp LA(Z)             &none  &none  &none  &none  &none              &none         &none         &none          &none       &none
+            >;
+        };
+
+        MEDIA_LAYER {
+            bindings = <
+&none  &none  &none  &none  &none                                                                                                                  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                                                                                    &none                  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                                                                                    &none                  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                                                                                    &kp RS(RA(RC(LG(H))))  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none  &none  &none  &kp C_VOLUME_UP    &kp LG(RC(RA(RS(U))))  &kp LG(LS(SPACE))  &none                  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none         &none  &none  &none  &kp C_VOLUME_DOWN  &kp RS(RA(RC(LG(M))))  &none                                     &none  &none  &none  &none  &none
             >;
         };
     };
