@@ -153,12 +153,12 @@
 
         TMUX_LAYER {
             bindings = <
-&none  &none       &none       &none       &none                                                                                        &none         &none         &none          &none       &none
-&none  &kp LA(N1)  &kp LA(N2)  &kp LA(N3)  &kp LA(N4)  &kp LA(N5)                                                           &kp LA(N6)  &kp LA(N7)    &kp LA(N8)    &kp LA(N9)     &kp LA(N0)  &none
-&none  &none       &kp LA(W)   &none       &none       &none                                                                &none       &none         &kp LA(UP)    &none          &none       &none
-&none  &none       &kp LA(P)   &none       &kp LA(N)   &none                                                                &kp LA(H)   &kp LA(LEFT)  &kp LA(DOWN)  &kp LA(RIGHT)  &none       &none
-&none  &none       &none       &kp LA(C)   &kp LA(V)   &none       &kp LA(LEFT_BRACKET)  &none  &none  &none  &none  &none  &none       &none         &none         &none          &none       &none
-&none  &none       &none       &none       &none                   &kp LA(Z)             &none  &none  &none  &none  &none              &none         &none         &none          &none       &none
+&none  &none       &none       &none       &none                                                                             &none         &none         &none          &none       &none
+&none  &kp LA(N1)  &kp LA(N2)  &kp LA(N3)  &kp LA(N4)  &kp LA(N5)                                                &kp LA(N6)  &kp LA(N7)    &kp LA(N8)    &kp LA(N9)     &kp LA(N0)  &none
+&none  &none       &kp LA(W)   &none       &none       &none                                                     &none       &none         &kp LA(UP)    &none          &none       &none
+&none  &none       &kp LA(P)   &none       &kp LA(N)   &none                                                     &kp LA(H)   &kp LA(LEFT)  &kp LA(DOWN)  &kp LA(RIGHT)  &none       &none
+&none  &none       &none       &kp LA(C)   &kp LA(V)   &none       &kp LA(D)  &none  &none  &none  &none  &none  &none       &none         &none         &none          &none       &none
+&none  &none       &none       &none       &none                   &kp LA(Z)  &none  &none  &none  &none  &none              &none         &none         &none          &none       &none
             >;
         };
 
