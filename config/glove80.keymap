@@ -103,7 +103,7 @@
 &kp TAB     &kp Q      &kp W      &kp E      &kp R      &kp T                                                                            &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
 &kp ESC     &kp A      &kp S      &kp D      &kp F      &kp G                                                                            &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
 &kp GRAVE   &kp Z      &kp X      &kp C      &kp V      &kp B   &kp LSHFT  &kp LCTRL  &mo 6       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
-&magic 2 0  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC   &mo 4      &kp DELETE  &mo 5         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &none
+&magic 2 0  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC   &mo 4      &kp DELETE  &mo 5         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &mo 2
             >;
         };
 
@@ -125,7 +125,7 @@
 &none        &none            &none            &none            &none            &none                                                             &none  &none  &none  &none  &none  &none
 &bootloader  &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_TOG                                                   &none  &none  &none  &none  &none  &bootloader
 &sys_reset   &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &none  &none  &none         &none  &none  &none  &none  &none  &none  &none  &none  &sys_reset
-&none        &none            &none            &none            &none                             &none  &none  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &to 0
+&none        &none            &none            &none            &none                             &none  &none  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &none
             >;
         };
 
