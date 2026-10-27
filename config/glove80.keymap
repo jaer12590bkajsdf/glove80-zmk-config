@@ -98,12 +98,12 @@
             // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
 
             bindings = <
-&kp F1      &kp F2    &kp F3   &kp F4    &kp F5                                                                                              &kp F6  &kp F7     &kp F8    &kp F9    &kp F10
-&kp EQUAL   &kp N1    &kp N2   &kp N3    &kp N4     &kp N5                                                                           &kp N6  &kp N7  &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB     &kp Q     &kp W    &kp E     &kp R      &kp T                                                                            &kp Y   &kp U   &kp I      &kp O     &kp P     &kp BSLH
-&kp ESC     &kp A     &kp S    &kp D     &kp F      &kp G                                                                            &kp H   &kp J   &kp K      &kp L     &kp SEMI  &kp SQT
-&kp GRAVE   &kp Z     &kp X    &kp C     &kp V      &kp B   &kp LSHFT  &kp LCTRL  &none       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
-&magic 2 0  &kp HOME  &kp END  &kp LEFT  &kp RIGHT          &kp BSPC   &mo 4      &kp DELETE  &none         &kp RET    &lt 3 SPACE           &kp UP  &kp DOWN   &kp LBKT  &kp RBKT  &none
+&kp F1      &kp F2     &kp F3     &kp F4     &kp F5                                                                                              &kp F6     &kp F7     &kp F8    &kp F9    &kp F10
+&kp EQUAL   &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                           &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp LC(LG(Q))
+&kp TAB     &kp Q      &kp W      &kp E      &kp R      &kp T                                                                            &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
+&kp ESC     &kp A      &kp S      &kp D      &kp F      &kp G                                                                            &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp GRAVE   &kp Z      &kp X      &kp C      &kp V      &kp B   &kp LSHFT  &kp LCTRL  &none       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
+&magic 2 0  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC   &mo 4      &kp DELETE  &none         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &none
             >;
         };
 
@@ -133,7 +133,7 @@
             bindings = <
 &none  &none       &none            &none          &none                                                                                                                       &none     &none     &none      &none      &none
 &none  &none       &none            &none          &none        &none                                                                                                   &none  &none     &none     &none      &none      &none
-&none  &none       &kp LG(W)        &none          &none        &none                                                                                                   &none  &none     &kp UP    &none      &kp PG_UP  &none
+&none  &none       &kp LG(W)        &none          &none        &none                                                                                                   &none  &kp HOME  &kp UP    &kp END    &kp PG_UP  &none
 &none  &kp LG(N1)  &kp LC(LS(TAB))  &kp LG(GRAVE)  &kp LC(TAB)  &kp LG(N9)                                                                                              &none  &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN  &none
 &none  &none       &none            &none          &none        &none       &kp LS(LA(LG(LEFT)))  &kp LS(LA(LG(RIGHT)))  &kp LS(LA(LG(UP_ARROW)))  &none  &none  &none  &none  &none     &none     &none      &none      &none
 &none  &none       &none            &none          &none                    &kp LS(LA(LG(LEFT)))  &none                  &none                     &none  &none  &none         &none     &none     &none      &none      &none
@@ -148,6 +148,17 @@
 &none  &kp RS(RA(RC(RG(A))))   &kp RS(RA(RC(RG(S))))   &kp RS(RA(RC(RG(D))))   &kp RS(RA(RC(RG(F))))   &kp RS(RA(RC(RG(G))))                                             &kp RS(RA(RC(RG(H))))   &kp RS(RA(RC(RG(J))))   &kp RA(RS(RC(RG(K))))   &kp RS(RC(RG(RA(L))))   &none                   &none
 &none  &kp RS(RA(RC(RG(Z))))   &kp RS(RA(RC(RG(X))))   &kp RS(RA(RC(RG(C))))   &kp RS(RA(RC(RG(V))))   &kp RS(RA(RC(RG(B))))   &none  &none  &none  &none  &none  &none  &kp RS(RA(RC(RG(N))))   &kp RS(RA(RC(RG(M))))   &none                   &none                   &none                   &none
 &none  &none                   &none                   &none                   &none                                           &none  &none  &none  &none  &none  &none                          &none                   &none                   &none                   &none                   &none
+            >;
+        };
+
+        TMUX_LAYER {
+            bindings = <
+&none  &none  &none  &none  &none                                                          &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                                            &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                                            &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                                            &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none         &none  &none  &none  &none  &none  &none         &none  &none  &none  &none  &none
             >;
         };
     };
