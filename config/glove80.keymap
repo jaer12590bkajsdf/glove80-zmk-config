@@ -36,7 +36,7 @@
             label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo 1>, <&to 1>;
+            bindings = <&mo 0>, <&to 0>;
         };
 
         magic: magic_hold_tap {
@@ -99,23 +99,12 @@
             // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
 
             bindings = <
-&kp F1          &kp F2     &kp F3     &kp F4     &kp F5                                                                                                            &lt 6 F6   &kp F7     &kp F8    &kp F9    &kp F10
-&kp EQUAL       &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                                         &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp LC(LG(Q))
-&kp TAB         &kp Q      &kp W      &kp E      &kp R      &kp T                                                                                          &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
-&kp LEFT_SHIFT  &kp A      &kp S      &kp D      &kp F      &kp G                                                                                          &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp GRAVE       &kp Z      &kp X      &kp C      &kp V      &kp B   &lt 4 LA(LC(LEFT_GUI))  &kp LC(C)   &mkp LCLK   &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
-&magic 2 0      &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC                &kp ESCAPE  &kp DELETE  &mo 5         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &mo 2
-            >;
-        };
-
-        lower_layer {
-            bindings = <
-&kp C_BRI_DN  &kp C_BRI_UP  &kp C_PREV  &kp C_NEXT  &kp C_PP                                                                         &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP   &none            &kp PAUSE_BREAK
-&trans        &none         &none       &none       &none      &kp HOME                                                   &kp LPAR   &kp KP_NUM  &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY  &kp PSCRN
-&trans        &none         &none       &kp UP      &none      &kp END                                                    &kp RPAR   &kp KP_N7   &kp KP_N8     &kp KP_N9      &kp KP_MINUS     &kp SLCK
-&trans        &none         &kp LEFT    &kp DOWN    &kp RIGHT  &kp PG_UP                                                  &kp PRCNT  &kp KP_N4   &kp KP_N5     &kp KP_N6      &kp KP_PLUS      &none
-&trans        &kp K_CMENU   &none       &kp F11     &kp F12    &kp PG_DN  &trans  &trans  &to 0   &trans  &trans  &trans  &kp COMMA  &kp KP_N1   &kp KP_N2     &kp KP_N3      &kp KP_ENTER     &trans
-&trans        &kp CAPS      &kp INS     &kp F11     &kp F12               &trans  &trans  &trans  &trans  &trans  &trans             &kp KP_N0   &kp KP_N0     &kp KP_DOT     &kp KP_ENTER     &trans
+&kp F1          &kp F2     &kp F3     &kp F4     &kp F5                                                                                                             &lt 6 F6   &kp F7     &kp F8    &kp F9    &kp F10
+&kp EQUAL       &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp LC(LG(Q))
+&kp TAB         &kp Q      &kp W      &kp E      &kp R      &kp T                                                                                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
+&kp GRAVE       &kp A      &kp S      &kp D      &kp F      &kp G                                                                                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp LEFT_SHIFT  &kp Z      &kp X      &kp C      &kp V      &kp B   &lt 3 LA(LC(LEFT_GUI))  &lt 4 LC(C)  &mkp LCLK   &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
+&magic 1 0      &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC                &kp ESCAPE   &kp DELETE  &mo 5         &kp RET    &lt 2 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &mo 1
             >;
         };
 
@@ -141,7 +130,7 @@
             >;
         };
 
-        LAUNCHER_LAYER {
+        LAUNCHER {
             bindings = <
 &none  &none                   &none                   &none                   &none                                                                                                             &none                   &none                   &none                   &none                   &none
 &none  &kp RS(RA(RC(RG(N1))))  &kp RS(RA(RC(RG(N2))))  &kp RS(RA(RC(RG(N3))))  &kp RS(RA(RC(RG(N4))))  &kp RC(RS(RA(RG(N5))))                                            &kp RS(RA(RC(RG(N6))))  &kp RS(RA(RC(RG(N7))))  &kp RS(RA(RC(RG(N8))))  &kp RS(RA(RC(RG(N9))))  &kp RS(RA(RC(RG(N0))))  &none
@@ -152,7 +141,18 @@
             >;
         };
 
-        TMUX_LAYER {
+        LAUNCHER_PREFILL {
+            bindings = <
+&none  &none                   &none                   &none                   &none                                                                                                             &none                   &none                   &none                   &none                   &none
+&none  &kp RS(RA(RC(LG(N1))))  &kp RS(RA(RC(LG(N2))))  &kp RS(RA(RC(LG(N3))))  &kp RS(RA(RC(RG(N4))))  &kp RC(RS(RA(LG(N5))))                                            &kp RS(RA(RC(LG(N6))))  &kp RS(RA(RC(LG(N7))))  &kp RS(RA(RC(LG(N8))))  &kp RS(RA(RC(LG(N9))))  &kp RS(RA(RC(LG(N0))))  &none
+&none  &kp RS(RA(RC(LG(Q))))   &kp RS(RA(RC(LG(W))))   &kp RS(RA(RC(LG(E))))   &kp RS(RC(RA(LG(R))))   &kp RS(RC(RA(LG(T))))                                             &kp RS(RA(RC(LG(Y))))   &kp RS(RA(RC(LG(U))))   &kp RS(RA(RC(LG(I))))   &kp RS(RA(RC(LG(O))))   &kp RS(RA(RC(LG(P))))   &none
+&none  &kp RS(RA(RC(LG(A))))   &kp RS(RA(RC(LG(S))))   &kp RS(RA(RC(LG(D))))   &kp RS(RA(RC(LG(F))))   &kp RS(RA(RC(LG(G))))                                             &kp RS(RA(RC(LG(H))))   &kp RS(RA(RC(LG(J))))   &kp RA(RS(RC(LG(K))))   &kp RS(RC(RA(LG(L))))   &none                   &none
+&none  &kp RS(RA(RC(LG(Z))))   &kp RS(RA(RC(LG(X))))   &kp RS(RA(RC(LG(C))))   &kp RS(RA(RC(LG(V))))   &kp RS(RA(RC(LG(B))))   &none  &none  &none  &none  &none  &none  &kp RS(RA(RC(LG(N))))   &kp RS(RA(RC(LG(M))))   &none                   &none                   &none                   &none
+&none  &none                   &none                   &none                   &none                                           &none  &none  &none  &none  &none  &none                          &none                   &none                   &none                   &none                   &none
+            >;
+        };
+
+        TMUX {
             bindings = <
 &none  &none       &none       &none       &none                                                                             &none         &none         &none          &none       &none
 &none  &kp LA(N1)  &kp LA(N2)  &kp LA(N3)  &kp LA(N4)  &kp LA(N5)                                                &kp LA(N6)  &kp LA(N7)    &kp LA(N8)    &kp LA(N9)     &kp LA(N0)  &none
@@ -163,14 +163,14 @@
             >;
         };
 
-        MEDIA_LAYER {
+        MEDIA {
             bindings = <
 &none  &none  &none  &none  &none                                                                                                                  &none  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none                                                                                    &none                  &none  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none                                                                                    &none                  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none                                                                                    &kp RS(RA(RC(LG(H))))  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none  &none  &none  &none  &kp C_VOLUME_UP    &kp LG(RC(RA(RS(U))))  &kp LG(LS(SPACE))  &none                  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none         &none  &none  &none  &kp C_VOLUME_DOWN  &kp RS(RA(RC(LG(M))))  &none                                     &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none                                                                                    &kp RS(RA(RG(LC(H))))  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none  &none  &none  &none  &none  &kp C_VOLUME_UP    &kp RA(RS(RG(LC(U))))  &kp LG(LS(SPACE))  &none                  &none  &none  &none  &none  &none
+&none  &none  &none  &none  &none         &none  &none  &none  &kp C_VOLUME_DOWN  &kp RS(RA(RG(LC(M))))  &none                                     &none  &none  &none  &none  &none
             >;
         };
     };
