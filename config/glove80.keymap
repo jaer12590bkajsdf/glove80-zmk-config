@@ -8,6 +8,7 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 
 #define HYPER LC(LS(LG(LALT)))
@@ -98,12 +99,12 @@
             // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
 
             bindings = <
-&kp F1      &kp F2     &kp F3     &kp F4     &kp F5                                                                                              &kp F6     &kp F7     &kp F8    &kp F9    &kp F10
-&kp EQUAL   &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                           &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp LC(LG(Q))
-&kp TAB     &kp Q      &kp W      &kp E      &kp R      &kp T                                                                            &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
-&kp ESC     &kp A      &kp S      &kp D      &kp F      &kp G                                                                            &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp GRAVE   &kp Z      &kp X      &kp C      &kp V      &kp B   &kp LSHFT  &kp LCTRL  &mo 6       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
-&magic 2 0  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC   &mo 4      &kp DELETE  &mo 5         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &mo 2
+&kp F1          &kp F2     &kp F3     &kp F4     &kp F5                                                                                                            &lt 6 F6   &kp F7     &kp F8    &kp F9    &kp F10
+&kp EQUAL       &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                                         &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp LC(LG(Q))
+&kp TAB         &kp Q      &kp W      &kp E      &kp R      &kp T                                                                                          &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
+&kp LEFT_SHIFT  &kp A      &kp S      &kp D      &kp F      &kp G                                                                                          &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp GRAVE       &kp Z      &kp X      &kp C      &kp V      &kp B   &lt 4 LA(LC(LEFT_GUI))  &kp LC(C)   &mkp LCLK   &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
+&magic 2 0      &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC                &kp ESCAPE  &kp DELETE  &mo 5         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &mo 2
             >;
         };
 
@@ -131,12 +132,12 @@
 
         ARROWS_LAYER {
             bindings = <
-&none  &none       &none            &none          &none                                                                                                                       &none     &none     &none      &none      &none
-&none  &none       &none            &none          &none        &none                                                                                                   &none  &none     &none     &none      &none      &none
-&none  &none       &kp LG(W)        &none          &none        &none                                                                                                   &none  &kp HOME  &kp UP    &kp END    &kp PG_UP  &none
-&none  &kp LG(N1)  &kp LC(LS(TAB))  &kp LG(GRAVE)  &kp LC(TAB)  &kp LG(N9)                                                                                              &none  &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN  &none
-&none  &none       &none            &none          &none        &none       &kp LS(LA(LG(LEFT)))  &kp LS(LA(LG(RIGHT)))  &kp LS(LA(LG(UP_ARROW)))  &none  &none  &none  &none  &none     &none     &none      &none      &none
-&none  &none       &none            &none          &none                    &kp LS(LA(LG(LEFT)))  &none                  &none                     &none  &none  &none         &none     &none     &none      &none      &none
+&none           &none       &none            &none          &none                                                                                                                       &none     &none     &none      &none      &none
+&none           &none       &none            &none          &none        &none                                                                                                   &none  &none     &none     &none      &none      &none
+&none           &none       &kp LG(W)        &none          &none        &none                                                                                                   &none  &kp HOME  &kp UP    &kp END    &kp PG_UP  &none
+&kp LEFT_SHIFT  &kp LG(N1)  &kp LC(LS(TAB))  &kp LG(GRAVE)  &kp LC(TAB)  &kp LG(N9)                                                                                              &none  &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN  &none
+&none           &none       &none            &none          &none        &none       &kp LS(LA(LG(LEFT)))  &kp LS(LA(LG(RIGHT)))  &kp LS(LA(LG(UP_ARROW)))  &none  &none  &none  &none  &none     &none     &none      &none      &none
+&none           &none       &none            &none          &none                    &none                 &none                  &kp LS(LA(LG(DOWN)))      &none  &none  &none         &none     &none     &none      &none      &none
             >;
         };
 
