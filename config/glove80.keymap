@@ -103,7 +103,7 @@
 &kp EQUAL       &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp LC(LG(Q))
 &kp TAB         &kp Q      &kp W      &kp E      &kp R      &kp T                                                                                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
 &kp GRAVE       &kp A      &kp S      &kp D      &kp F      &kp G                                                                                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LEFT_SHIFT  &kp Z      &kp X      &kp C      &kp V      &kp B   &lt 3 LA(LC(LEFT_GUI))  &lt 4 LC(C)  &mkp LCLK   &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
+&kp LEFT_SHIFT  &kp Z      &kp X      &kp C      &kp V      &kp B   &lt 3 LA(LC(LEFT_GUI))  &lt 4 LC(C)  &mo 7       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
 &magic 1 0      &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC                &kp ESCAPE   &kp DELETE  &mo 5         &kp RET    &lt 2 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &mo 1
             >;
         };
@@ -171,6 +171,17 @@
 &none  &none  &none  &none  &none  &none                                                                                    &kp RS(RA(RG(LC(H))))  &none  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none  &none  &none  &none  &kp C_VOLUME_UP    &kp RA(RS(RG(LC(U))))  &kp LG(LS(SPACE))  &none                  &none  &none  &none  &none  &none
 &none  &none  &none  &none  &none         &none  &none  &none  &kp C_VOLUME_DOWN  &kp RS(RA(RG(LC(M))))  &none                                     &none  &none  &none  &none  &none
+            >;
+        };
+
+        MOUSE {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                                                                                &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                        &trans          &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                        &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                        &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &none   &trans     &trans     &trans          &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK                  &trans          &trans          &trans           &trans  &trans
             >;
         };
     };
