@@ -1,0 +1,105 @@
+diff --git a/src/rgb_underglow.c b/src/rgb_underglow.c
+index c4834caf..99c29f79 100644
+--- a/src/rgb_underglow.c
++++ b/src/rgb_underglow.c
+@@ -29,6 +29,7 @@
+ #include <zmk/activity.h>
+ #include <zmk/event_manager.h>
+ #include <zmk/events/activity_state_changed.h>
++#include <zmk/events/layer_state_changed.h>
+ #include <zmk/events/usb_conn_state_changed.h>
+ #include <zmk/workqueue.h>
+ 
+@@ -51,6 +52,11 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
+ #define SAT_MAX 100
+ #define BRT_MAX 100
+ 
++// Red LED under one key while a layer is active.
++#define LAYER_INDICATOR_LAYER 2   // SYMBOLS: its position in config/glove80.keymap
++#define LAYER_INDICATOR_PIXEL 29  // the "1" key: see the LED map in glove80_lh.dts
++#define LAYER_INDICATOR_RENDER_MS 25
++
+ BUILD_ASSERT(CONFIG_ZMK_RGB_UNDERGLOW_BRT_MIN <= CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX,
+              "ERROR: RGB underglow maximum brightness is less than minimum brightness");
+ 
+@@ -79,6 +85,9 @@ static struct led_rgb status_pixels[STRIP_NUM_PIXELS];
+ 
+ static struct rgb_underglow_state state;
+ 
++// Not part of `state`: that struct is persisted, and a size change discards the saved settings.
++static bool layer_indicator_on;
++
+ #if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER)
+ static const struct device *const ext_power = DEVICE_DT_GET(DT_INST(0, zmk_ext_power_generic));
+ #endif
+@@ -209,7 +218,7 @@ static void zmk_led_write_pixels(void) {
+     }
+ 
+     // fast path: no status indicators, battery level OK
+-    if (blend == 0 && bat0 >= 20) {
++    if (blend == 0 && bat0 >= 20 && !layer_indicator_on) {
+         led_strip_update_rgb(led_strip, pixels, STRIP_NUM_PIXELS);
+         return;
+     }
+@@ -247,6 +256,11 @@ static void zmk_led_write_pixels(void) {
+         }
+     }
+ 
++    if (layer_indicator_on) {
++        led_buffer[LAYER_INDICATOR_PIXEL] =
++            (struct led_rgb){r : CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX, g : 0, b : 0};
++    }
++
+     // battery below 20%, reduce LED brightness
+     if (bat0 < 20) {
+         for (int i = 0; i < STRIP_NUM_PIXELS; i++) {
+@@ -547,11 +561,11 @@ void zmk_rgb_set_ext_power(void) {
+         LOG_ERR("Unable to examine EXT_POWER: %d", c_power);
+         c_power = 0;
+     }
+-    int desired_state = state.on || state.status_active;
++    int desired_state = state.on || state.status_active || layer_indicator_on;
+ 
+ #if IS_ENABLED(CONFIG_ZMK_BATTERY_REPORTING)
+     // force power off, when battery low (<10%)
+-    if (state.on && !state.status_active) {
++    if (!state.status_active) {
+         if (zmk_battery_state_of_charge() < 10) {
+             desired_state = false;
+         }
+@@ -822,4 +836,35 @@ ZMK_SUBSCRIPTION(rgb_underglow, zmk_activity_state_changed);
+ ZMK_SUBSCRIPTION(rgb_underglow, zmk_usb_conn_state_changed);
+ #endif
+ 
++static void layer_indicator_work_handler(struct k_work *work);
++
++static K_WORK_DELAYABLE_DEFINE(layer_indicator_work, layer_indicator_work_handler);
++
++static void layer_indicator_work_handler(struct k_work *work) {
++    layer_indicator_on = zmk_keymap_layer_active(LAYER_INDICATOR_LAYER);
++
++    zmk_led_write_pixels();
++    zmk_rgb_set_ext_power();
++
++    // With underglow off nothing else renders, and the strip misses writes while it powers up.
++    if (layer_indicator_on && !state.on) {
++        k_work_reschedule_for_queue(zmk_workqueue_lowprio_work_q(), &layer_indicator_work,
++                                    K_MSEC(LAYER_INDICATOR_RENDER_MS));
++    }
++}
++
++static int layer_indicator_listener(const zmk_event_t *eh) {
++    const struct zmk_layer_state_changed *ev = as_zmk_layer_state_changed(eh);
++
++    if (ev != NULL && ev->layer == LAYER_INDICATOR_LAYER) {
++        k_work_reschedule_for_queue(zmk_workqueue_lowprio_work_q(), &layer_indicator_work,
++                                    K_NO_WAIT);
++    }
++
++    return ZMK_EV_EVENT_BUBBLE;
++}
++
++ZMK_LISTENER(rgb_underglow_layer_indicator, layer_indicator_listener);
++ZMK_SUBSCRIPTION(rgb_underglow_layer_indicator, zmk_layer_state_changed);
++
+ SYS_INIT(zmk_rgb_underglow_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
