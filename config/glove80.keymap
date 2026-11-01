@@ -122,8 +122,6 @@
             >;
         };
 
-        // Red LED under the "1" key while active. rgb-layer-indicator.patch hardcodes this
-        // layer's position (2): update LAYER_INDICATOR_LAYER there if this layer moves.
         SYMBOLS {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                                                                  &trans  &trans  &trans  &trans  &trans
@@ -135,6 +133,8 @@
             >;
         };
 
+        // Red LED under the "3" key while active. rgb-layer-indicator.patch hardcodes this
+        // layer's position (3): update LAYER_INDICATOR_LAYER there if this layer moves.
         ARROWS_LAYER {
             bindings = <
 &none           &none       &none            &none          &none                                                                                                                       &none     &none     &none      &none      &none
