@@ -1,5 +1,5 @@
 diff --git a/src/rgb_underglow.c b/src/rgb_underglow.c
-index c4834caf..e15666d2 100644
+index c4834caf..2167988c 100644
 --- a/src/rgb_underglow.c
 +++ b/src/rgb_underglow.c
 @@ -29,6 +29,7 @@
@@ -10,55 +10,81 @@ index c4834caf..e15666d2 100644
  #include <zmk/events/usb_conn_state_changed.h>
  #include <zmk/workqueue.h>
  
-@@ -51,6 +52,11 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
+@@ -51,6 +52,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
  #define SAT_MAX 100
  #define BRT_MAX 100
  
-+// Red LED under one key while a layer is active.
-+#define LAYER_INDICATOR_LAYER 3   // ARROWS_LAYER: its position in config/glove80.keymap
-+#define LAYER_INDICATOR_PIXEL 17  // the "3" key: see the LED map in glove80_lh.dts
 +#define LAYER_INDICATOR_RENDER_MS 25
 +
  BUILD_ASSERT(CONFIG_ZMK_RGB_UNDERGLOW_BRT_MIN <= CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX,
               "ERROR: RGB underglow maximum brightness is less than minimum brightness");
  
-@@ -79,6 +85,9 @@ static struct led_rgb status_pixels[STRIP_NUM_PIXELS];
+@@ -79,6 +82,37 @@ static struct led_rgb status_pixels[STRIP_NUM_PIXELS];
  
  static struct rgb_underglow_state state;
  
++#define LAYER_COLOR(R, G, B)                                                                       \
++    {                                                                                              \
++        r : (CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX * (R)) / 0xff,                                       \
++        g : (CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX * (G)) / 0xff,                                       \
++        b : (CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX * (B)) / 0xff                                        \
++    }
++
++// One lit key per layer while it is active, indexed by layer position in config/glove80.keymap.
++// Pixels come from the LED map in glove80_lh.dts. Left half only: the right half doesn't know the
++// active layer, so 6-9 sit under 1-4 rather than on their own number keys.
++static const struct {
++    uint8_t pixel;
++    struct led_rgb color;
++} layer_indicators[] = {
++    [1] = {29, LAYER_COLOR(0x8f, 0x00, 0xff)}, // magic_layer: "1", violet
++    [2] = {23, LAYER_COLOR(0xff, 0xd0, 0x00)}, // SYMBOLS: "2", yellow
++    [3] = {17, LAYER_COLOR(0xff, 0x00, 0x00)}, // ARROWS_LAYER: "3", red
++    [4] = {11, LAYER_COLOR(0x00, 0xff, 0x00)}, // LAUNCHER: "4", green
++    [5] = {6, LAYER_COLOR(0x00, 0xff, 0xff)},  // LAUNCHER_PREFILL: "5", cyan
++    [6] = {30, LAYER_COLOR(0xff, 0x50, 0x00)}, // TMUX: "Q", orange
++    [7] = {24, LAYER_COLOR(0xff, 0x00, 0xa0)}, // SLACK: "W", magenta
++    [8] = {18, LAYER_COLOR(0x00, 0x40, 0xff)}, // MEDIA: "E", blue
++    [9] = {12, LAYER_COLOR(0x00, 0xff, 0x80)}, // MOUSE: "R", teal
++};
++
++// Every layer in the table except the base layer.
++#define LAYER_INDICATORS_MASK ((BIT(ARRAY_SIZE(layer_indicators)) - 1) & ~BIT(0))
++
 +// Not part of `state`: that struct is persisted, and a size change discards the saved settings.
-+static bool layer_indicator_on;
++static zmk_keymap_layers_state_t layer_indicators_on;
 +
  #if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER)
  static const struct device *const ext_power = DEVICE_DT_GET(DT_INST(0, zmk_ext_power_generic));
  #endif
-@@ -209,7 +218,7 @@ static void zmk_led_write_pixels(void) {
+@@ -209,7 +243,7 @@ static void zmk_led_write_pixels(void) {
      }
  
      // fast path: no status indicators, battery level OK
 -    if (blend == 0 && bat0 >= 20) {
-+    if (blend == 0 && bat0 >= 20 && !layer_indicator_on) {
++    if (blend == 0 && bat0 >= 20 && !layer_indicators_on) {
          led_strip_update_rgb(led_strip, pixels, STRIP_NUM_PIXELS);
          return;
      }
-@@ -247,6 +256,11 @@ static void zmk_led_write_pixels(void) {
+@@ -247,6 +281,12 @@ static void zmk_led_write_pixels(void) {
          }
      }
  
-+    if (layer_indicator_on) {
-+        led_buffer[LAYER_INDICATOR_PIXEL] =
-+            (struct led_rgb){r : CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX, g : 0, b : 0};
++    for (int i = 0; i < ARRAY_SIZE(layer_indicators); i++) {
++        if (layer_indicators_on & BIT(i)) {
++            led_buffer[layer_indicators[i].pixel] = layer_indicators[i].color;
++        }
 +    }
 +
      // battery below 20%, reduce LED brightness
      if (bat0 < 20) {
          for (int i = 0; i < STRIP_NUM_PIXELS; i++) {
-@@ -547,11 +561,11 @@ void zmk_rgb_set_ext_power(void) {
+@@ -547,11 +587,11 @@ void zmk_rgb_set_ext_power(void) {
          LOG_ERR("Unable to examine EXT_POWER: %d", c_power);
          c_power = 0;
      }
 -    int desired_state = state.on || state.status_active;
-+    int desired_state = state.on || state.status_active || layer_indicator_on;
++    int desired_state = state.on || state.status_active || layer_indicators_on;
  
  #if IS_ENABLED(CONFIG_ZMK_BATTERY_REPORTING)
      // force power off, when battery low (<10%)
@@ -67,7 +93,7 @@ index c4834caf..e15666d2 100644
          if (zmk_battery_state_of_charge() < 10) {
              desired_state = false;
          }
-@@ -822,4 +836,35 @@ ZMK_SUBSCRIPTION(rgb_underglow, zmk_activity_state_changed);
+@@ -822,4 +862,33 @@ ZMK_SUBSCRIPTION(rgb_underglow, zmk_activity_state_changed);
  ZMK_SUBSCRIPTION(rgb_underglow, zmk_usb_conn_state_changed);
  #endif
  
@@ -76,22 +102,20 @@ index c4834caf..e15666d2 100644
 +static K_WORK_DELAYABLE_DEFINE(layer_indicator_work, layer_indicator_work_handler);
 +
 +static void layer_indicator_work_handler(struct k_work *work) {
-+    layer_indicator_on = zmk_keymap_layer_active(LAYER_INDICATOR_LAYER);
++    layer_indicators_on = zmk_keymap_layer_state() & LAYER_INDICATORS_MASK;
 +
 +    zmk_led_write_pixels();
 +    zmk_rgb_set_ext_power();
 +
 +    // With underglow off nothing else renders, and the strip misses writes while it powers up.
-+    if (layer_indicator_on && !state.on) {
++    if (layer_indicators_on && !state.on) {
 +        k_work_reschedule_for_queue(zmk_workqueue_lowprio_work_q(), &layer_indicator_work,
 +                                    K_MSEC(LAYER_INDICATOR_RENDER_MS));
 +    }
 +}
 +
 +static int layer_indicator_listener(const zmk_event_t *eh) {
-+    const struct zmk_layer_state_changed *ev = as_zmk_layer_state_changed(eh);
-+
-+    if (ev != NULL && ev->layer == LAYER_INDICATOR_LAYER) {
++    if (as_zmk_layer_state_changed(eh) != NULL) {
 +        k_work_reschedule_for_queue(zmk_workqueue_lowprio_work_q(), &layer_indicator_work,
 +                                    K_NO_WAIT);
 +    }
