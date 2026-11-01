@@ -91,6 +91,7 @@
 
     // layer_indicators in rgb-layer-indicator.patch sets each layer's lit key and colour by its
     // position here: update that table if layers are added or reordered.
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -109,7 +110,7 @@
 &kp TAB         &kp Q      &kp W      &kp E      &kp R      &kp T                                                                                               &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
 &kp GRAVE       &kp A      &kp S      &kp D      &kp F      &kp G                                                                                               &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LEFT_SHIFT  &kp Z      &kp X      &kp C      &kp V      &kp B   &lt (4) LA(LC(LEFT_GUI))  &lt (5) LC(C)  &mo 9       &kp LEFT_ALT  &kp RCTRL  &kp LEFT_GUI  &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp MINUS
-&magic 1 0      &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC                  &kp ESCAPE     &kp DELETE  &mo 6         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &mo 1
+&lt 1 GLOBE     &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC                  &kp ESCAPE     &kp DELETE  &mo 6         &kp RET    &lt 3 SPACE           &kp LG(F)  &none      &kp LBKT  &kp RBKT  &mo 1
             >;
         };
 
