@@ -1,5 +1,5 @@
 diff --git a/src/rgb_underglow.c b/src/rgb_underglow.c
-index c4834caf..2167988c 100644
+index c4834caf..464069fd 100644
 --- a/src/rgb_underglow.c
 +++ b/src/rgb_underglow.c
 @@ -29,6 +29,7 @@
@@ -19,7 +19,7 @@ index c4834caf..2167988c 100644
  BUILD_ASSERT(CONFIG_ZMK_RGB_UNDERGLOW_BRT_MIN <= CONFIG_ZMK_RGB_UNDERGLOW_BRT_MAX,
               "ERROR: RGB underglow maximum brightness is less than minimum brightness");
  
-@@ -79,6 +82,37 @@ static struct led_rgb status_pixels[STRIP_NUM_PIXELS];
+@@ -79,6 +82,41 @@ static struct led_rgb status_pixels[STRIP_NUM_PIXELS];
  
  static struct rgb_underglow_state state;
  
@@ -48,6 +48,10 @@ index c4834caf..2167988c 100644
 +    [9] = {12, LAYER_COLOR(0x00, 0xff, 0x80)}, // MOUSE: "R", teal
 +};
 +
++// While this layer is on all indicators are off. It is toggled from magic_layer, and like any
++// layer state it resets on reboot.
++#define LAYER_INDICATORS_OFF_LAYER 10
++
 +// Every layer in the table except the base layer.
 +#define LAYER_INDICATORS_MASK ((BIT(ARRAY_SIZE(layer_indicators)) - 1) & ~BIT(0))
 +
@@ -57,7 +61,7 @@ index c4834caf..2167988c 100644
  #if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER)
  static const struct device *const ext_power = DEVICE_DT_GET(DT_INST(0, zmk_ext_power_generic));
  #endif
-@@ -209,7 +243,7 @@ static void zmk_led_write_pixels(void) {
+@@ -209,7 +247,7 @@ static void zmk_led_write_pixels(void) {
      }
  
      // fast path: no status indicators, battery level OK
@@ -66,7 +70,7 @@ index c4834caf..2167988c 100644
          led_strip_update_rgb(led_strip, pixels, STRIP_NUM_PIXELS);
          return;
      }
-@@ -247,6 +281,12 @@ static void zmk_led_write_pixels(void) {
+@@ -247,6 +285,12 @@ static void zmk_led_write_pixels(void) {
          }
      }
  
@@ -79,7 +83,7 @@ index c4834caf..2167988c 100644
      // battery below 20%, reduce LED brightness
      if (bat0 < 20) {
          for (int i = 0; i < STRIP_NUM_PIXELS; i++) {
-@@ -547,11 +587,11 @@ void zmk_rgb_set_ext_power(void) {
+@@ -547,11 +591,11 @@ void zmk_rgb_set_ext_power(void) {
          LOG_ERR("Unable to examine EXT_POWER: %d", c_power);
          c_power = 0;
      }
@@ -93,7 +97,7 @@ index c4834caf..2167988c 100644
          if (zmk_battery_state_of_charge() < 10) {
              desired_state = false;
          }
-@@ -822,4 +862,33 @@ ZMK_SUBSCRIPTION(rgb_underglow, zmk_activity_state_changed);
+@@ -822,4 +866,36 @@ ZMK_SUBSCRIPTION(rgb_underglow, zmk_activity_state_changed);
  ZMK_SUBSCRIPTION(rgb_underglow, zmk_usb_conn_state_changed);
  #endif
  
@@ -102,7 +106,10 @@ index c4834caf..2167988c 100644
 +static K_WORK_DELAYABLE_DEFINE(layer_indicator_work, layer_indicator_work_handler);
 +
 +static void layer_indicator_work_handler(struct k_work *work) {
-+    layer_indicators_on = zmk_keymap_layer_state() & LAYER_INDICATORS_MASK;
++    zmk_keymap_layers_state_t layers = zmk_keymap_layer_state();
++
++    layer_indicators_on =
++        (layers & BIT(LAYER_INDICATORS_OFF_LAYER)) ? 0 : (layers & LAYER_INDICATORS_MASK);
 +
 +    zmk_led_write_pixels();
 +    zmk_rgb_set_ext_power();

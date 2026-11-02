@@ -120,7 +120,7 @@
 &none        &none            &none            &none            &none            &none                                                             &none  &none  &none  &none  &none  &none
 &bootloader  &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_TOG                                                   &none  &none  &none  &none  &none  &bootloader
 &sys_reset   &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &none  &none  &none         &none  &none  &none  &none  &none  &none  &none  &none  &sys_reset
-&none        &none            &none            &none            &none                             &none  &none  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &none
+&none        &tog 10          &none            &none            &none                             &none  &none  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &none
             >;
         };
 
@@ -209,6 +209,19 @@
 &none  &none  &none  &none  &none  &none                                                    &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &none  &none
 &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none      &none      &none           &none           &none           &none            &none  &none
 &none  &none  &none  &none  &none         &none  &none  &none  &none  &mkp RCLK  &mkp LCLK                  &none           &none           &none            &none  &none
+            >;
+        };
+
+        // Not a real layer: an on/off switch for the per-layer key lights, toggled by the HOME
+        // position on magic_layer. Its position (10) is hardcoded in rgb-layer-indicator.patch.
+        LIGHTS_OFF {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                                                                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
