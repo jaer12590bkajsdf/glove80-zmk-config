@@ -104,12 +104,12 @@
             // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
 
             bindings = <
-&lt 8 F1           &lt 7 F2   &kp F3     &kp F4     &kp F5                                                                                                                       &kp F6     &kp F7  &kp F8  &kp F9  &kp F10
-&none              &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                                                    &kp N6  &kp N7     &kp N8  &kp N9  &kp N0  &kp LC(LG(Q))
-&none              &kp Q      &kp W      &kp E      &kp R      &kp T                                                                                                     &kp Y   &kp U      &kp I   &kp O   &kp P   &none
-&none              &kp A      &kp S      &kp D      &kp F      &kp G                                                                                                     &kp H   &kp J      &kp K   &kp L   &none   &none
-&kp LEFT_SHIFT     &kp Z      &kp X      &kp C      &kp V      &kp B   &lt (4) LA(LC(LEFT_GUI))  &lt 5 ESCAPE  &lt (9) LC(C)  &kp LEFT_ALT  &kp RCTRL  &mt LEFT_GUI TAB  &kp N   &kp M      &none   &none   &none   &none
-&lt (1) LC(SPACE)  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC                  &mo 2         &kp DELETE     &mo 6         &kp RET    &lt 3 SPACE               &kp LG(F)  &none   &none   &none   &mo 1
+&lt 9 F1           &lt 8 F2   &kp F3     &kp F4     &kp F5                                                                                                                        &kp F6     &kp F7  &kp F8  &kp F9  &kp F10
+&none              &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                                                                                                     &kp N6  &kp N7     &kp N8  &kp N9  &kp N0  &kp LC(LG(Q))
+&none              &kp Q      &kp W      &kp E      &kp R      &kp T                                                                                                      &kp Y   &kp U      &kp I   &kp O   &kp P   &kp DELETE
+&none              &kp A      &kp S      &kp D      &kp F      &kp G                                                                                                      &kp H   &kp J      &kp K   &kp L   &none   &none
+&kp LEFT_SHIFT     &kp Z      &kp X      &kp C      &kp V      &kp B   &lt (5) LA(LC(LEFT_GUI))  &lt 6 ESCAPE  &lt (10) LC(C)  &kp LEFT_ALT  &kp RCTRL  &mt LEFT_GUI TAB  &kp N   &kp M      &none   &none   &none   &none
+&lt (1) LC(SPACE)  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)          &kp BSPC                  &mo 3         &mo 2           &mo 7         &kp RET    &lt 4 SPACE               &kp LG(F)  &none   &none   &none   &mo 1
             >;
         };
 
@@ -120,7 +120,18 @@
 &none        &none            &none            &none            &none            &none                                                                  &none  &none  &none  &none  &none  &none
 &bootloader  &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_TOG                                                        &none  &none  &none  &none  &none  &bootloader
 &sys_reset   &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF  &none       &none  &none         &none  &none  &none  &none  &none  &none  &none  &none  &sys_reset
-&none        &tog 10          &none            &none            &none                             &magic 1 0  &none  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &none
+&none        &tog 11          &none            &none            &none                             &magic 1 0  &none  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &none
+            >;
+        };
+
+        NUMBERS {
+            bindings = <
+&none  &none   &none   &none   &none                                                             &none   &none   &none   &none   &none
+&none  &none   &none   &none   &none   &none                                             &none   &none   &none   &none   &none   &none
+&none  &none   &none   &none   &none   &none                                             &none   &none   &none   &none   &none   &none
+&none  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5                                            &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &none
+&none  &none   &none   &none   &none   &none   &none  &none  &none  &none  &none  &none  &none   &none   &none   &none   &none   &none
+&none  &none   &none   &none   &none           &none  &none  &none  &none  &none  &none          &none   &none   &none   &none   &none
             >;
         };
 
@@ -211,9 +222,6 @@
 &none  &none  &none  &none  &none         &none  &none  &none  &none  &mkp RCLK  &mkp LCLK                  &none           &none           &none            &none  &none
             >;
         };
-
-        // Not a real layer: an on/off switch for the per-layer key lights, toggled by the HOME
-        // position on magic_layer. Its position (10) is hardcoded in rgb-layer-indicator.patch.
 
         LIGHTS_OFF {
             bindings = <
