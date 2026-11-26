@@ -126,23 +126,23 @@
 
         NUMBERS {
             bindings = <
-&none  &none   &none   &none   &none                                                             &none   &none   &none   &none   &none
-&none  &none   &none   &none   &none   &none                                             &none   &none   &none   &none   &none   &none
-&none  &none   &none   &none   &none   &none                                             &none   &none   &none   &none   &none   &none
-&none  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5                                            &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &none
-&none  &none   &none   &none   &none   &none   &none  &none  &none  &none  &none  &none  &none   &none   &none   &none   &none   &none
-&none  &none   &none   &none   &none           &none  &none  &none  &none  &none  &none          &none   &none   &none   &none   &none
+&none           &none   &none   &none   &none                                                                           &none   &none   &none   &none   &none
+&none           &none   &none   &none   &none   &none                                                           &none   &none   &none   &none   &none   &none
+&none           &none   &none   &none   &none   &none                                                           &none   &none   &none   &none   &none   &kp DELETE
+&none           &kp N1  &kp N2  &kp N3  &kp N4  &kp N5                                                          &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &none
+&kp LEFT_SHIFT  &none   &none   &none   &none   &none   &none          &none  &none  &none  &none    &kp TAB    &none   &none   &none   &none   &none   &none
+&none           &none   &none   &none   &none           &kp BACKSPACE  &none  &none  &none  &kp RET  &kp SPACE          &none   &none   &none   &none   &none
             >;
         };
 
         SYMBOLS {
             bindings = <
-&none           &none      &none      &none              &none                                                                                                         &none          &none          &none                 &none                  &none
-&none           &none      &none      &none              &none             &none                                                                         &none         &none          &none          &none                 &none                  &none
-&none           &kp EXCL   &kp AT     &kp POUND          &kp DOLLAR        &kp PERCENT                                                                   &kp CARET     &kp AMPERSAND  &kp STAR       &kp LEFT_BRACE        &kp RIGHT_BRACE        &none
-&none           &kp GRAVE  &kp SLASH  &kp COLON          &kp MINUS         &kp UNDER                                                                     &kp QUESTION  &kp COMMA      &kp PERIOD     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &none
-&kp LEFT_SHIFT  &kp TILDE  &kp PLUS   &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE  &kp SEMICOLON  &none          &none  &none       &none  &none      &kp TAB    &kp PIPE      &kp EQUAL      &kp BACKSLASH  &kp LBKT              &kp RBKT               &none
-&none           &none      &none      &none              &none                            &kp BACKSPACE  &none  &kp DELETE  &none  &kp ENTER  &kp SPACE                &none          &none          &kp LESS_THAN         &kp GREATER_THAN       &none
+&none           &none      &none      &none              &none                                                                                                    &none          &none          &none                 &none                  &none
+&none           &none      &none      &none              &none             &none                                                                    &none         &none          &none          &none                 &none                  &none
+&none           &kp EXCL   &kp AT     &kp POUND          &kp DOLLAR        &kp PERCENT                                                              &kp CARET     &kp AMPERSAND  &kp STAR       &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp DEL
+&none           &kp GRAVE  &kp SLASH  &kp COLON          &kp MINUS         &kp UNDER                                                                &kp QUESTION  &kp COMMA      &kp PERIOD     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &none
+&kp LEFT_SHIFT  &kp TILDE  &kp PLUS   &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE  &kp SEMICOLON  &none          &none  &none  &none  &none      &kp TAB    &kp PIPE      &kp EQUAL      &kp BACKSLASH  &kp LBKT              &kp RBKT               &none
+&none           &none      &none      &none              &none                            &kp BACKSPACE  &none  &none  &none  &kp ENTER  &kp SPACE                &none          &none          &kp LESS_THAN         &kp GREATER_THAN       &none
             >;
         };
 
